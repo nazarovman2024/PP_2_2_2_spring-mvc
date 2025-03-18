@@ -16,8 +16,8 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping(value = "/users")
-    public String getUsers(@RequestParam(value = "count", defaultValue = "5") int count, Model model) {
-        List<User> users = userService.getUsers();
+    public String listUsers(@RequestParam(value = "count", defaultValue = "5") int count, Model model) {
+        List<User> users = userService.subUsers(count);
         model.addAttribute("users", users);
         return "users";
     }
