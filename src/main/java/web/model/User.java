@@ -16,16 +16,12 @@ public class User {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "email")
-    private String email;
-
     public User() {
     }
 
-    public User(String firstName, String lastName, String email) {
+    public User(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.email = email;
     }
 
     public Long getId() {
@@ -52,19 +48,10 @@ public class User {
         this.lastName = lastName;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     @Override
     public String toString() {
         return "Id = " + id + "\n"
                 + "First Name = " + firstName + "\n"
-                + "Last Name = " + lastName + "\n"
-                + "Email = " + email + "\n";
+                + "Last Name = " + lastName + "\n";
     }
 }

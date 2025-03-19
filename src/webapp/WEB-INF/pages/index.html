@@ -4,12 +4,39 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
+
+    <style>
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            color: #fff;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 4px #999;
+        }
+
+        .btn:hover {background-color: #3e8e41}
+
+        .btn:active {
+            background-color: #3e8e41;
+            box-shadow: 0 2px #666;
+            transform: translateY(2px);
+        }
+    </style>
 </head>
 <body>
 <div>
     <th:block th:each="msg : ${messages}">
         <h1 th:text="${msg}"></h1>
     </th:block>
+
+    <a href="./users" class="btn">Users</a>
 </div>
 </body>
 </html>

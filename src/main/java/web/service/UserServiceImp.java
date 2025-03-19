@@ -24,14 +24,31 @@ public class UserServiceImp implements UserService{
         userDao.add(user);
     }
 
+    @Transactional
     @Override
-    public List<User> getUsers() {
-        return this.userDao.getUsers();
+    public void update(User user) {
+        userDao.update(user);
+    }
+
+    @Override
+    public User getUser(long id) {
+        return userDao.getUser(id);
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+        return this.userDao.getAllUsers();
     }
 
     @Transactional(readOnly = true)
     @Override
-    public List<User> subUsers(int count) {
-        return this.userDao.subUsers(count);
+    public List<User> getUsers(int count) {
+        return this.userDao.getUsers(count);
+    }
+
+    @Transactional
+    @Override
+    public void delete(long id) {
+        this.userDao.delete(id);
     }
 }

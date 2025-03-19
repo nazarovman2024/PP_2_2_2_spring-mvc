@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit</title>
+
+    <style>
+        .btn {
+            display: inline-block;
+            padding: 5px 10px;
+            font-size: 14px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            margin: 2px;
+        }
+
+        .btn-users {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            color: #fff;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 4px #999;
+        }
+
+        .btn-users:hover {background-color: #3e8e41}
+
+        .btn:active {
+            background-color: #3e8e41;
+            box-shadow: 0 2px #666;
+            transform: translateY(2px);
+        }
+
+        .btn-apply {
+            background-color: #4CAF50;
+        }
+
+        .btn-apply:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<h1>Edit</h1>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>FirstName</th>
+        <th>LastName</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <form th:action="@{/users/edit/apply(id=${user.id})}" method="post" th:object="${user}">
+            <td th:text="${user.id}"></td>
+            <td>
+                <input type="text"
+                       id="firstName"
+                       name="firstName"
+                       th:field="*{firstName}"
+                       th:placeholder="${user.firstName}"
+                       required>
+            </td>
+            <td>
+                <input type="text"
+                       id="lastName"
+                       name="lastName"
+                       th:field="*{lastName}"
+                       th:placeholder="${user.lastName}"
+                       required>
+            </td>
+            <td>
+                <button type="submit" class="btn btn-apply">Apply</button>
+            </td>
+        </form>
+    </tr>
+    </tbody>
+</table>
+
+<a href="../users" class="btn-users">Users</a>
+
+</body>
+</html>
