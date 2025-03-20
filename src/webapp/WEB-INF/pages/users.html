@@ -56,19 +56,26 @@
     <thead>
     <tr>
         <th>ID</th>
-        <th>FirstName</th>
-        <th>LastName</th>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Email</th>
     </tr>
     </thead>
     <tbody>
     <tr>
-    <form th:action="@{/users/add}" method="post" th:object="${user}">
+    <form th:action="@{/users}" method="post" th:object="${user}">
         <td>#</td>
         <td>
-            <input type="text" th:field="*{firstName}" placeholder="First Name" required>
+            <input type="text" th:field="*{name}" placeholder="Name" required>
+            <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="error"></div>
         </td>
         <td>
-            <input type="text" th:field="*{lastName}" placeholder="Last Name" required>
+            <input type="text" th:field="*{age}" placeholder="Age" required>
+            <div th:if="${#fields.hasErrors('age')}" th:errors="*{age}" class="error"></div>
+        </td>
+        <td>
+            <input type="text" th:field="*{email}" placeholder="Email" required>
+            <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error"></div>
         </td>
         <td>
             <button type="submit" class="btn btn-add">Add</button>
@@ -78,8 +85,9 @@
 
     <tr th:each="user : ${users}">
         <td th:text="${user.id}"></td>
-        <td th:text="${user.firstName}"></td>
-        <td th:text="${user.lastName}"></td>
+        <td th:text="${user.name}"></td>
+        <td th:text="${user.age}"></td>
+        <td th:text="${user.email}"></td>
         <td>
             <a th:href="@{users/edit(id=${user.id})}" class="btn btn-edit">Edit</a>
         </td>

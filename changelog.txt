@@ -6,23 +6,28 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+### Fixed
+### Changed
+### Removed
+
+## [20250320_JPP_2.3.1_fix0.2]
 
 ### Added
-
-### Fixed
+- Input validation.
 
 ### Changed
+- User's fields.
 
 ### Removed
+- Unnecessary "this." from the "UserServiceImp".
 
 ## [20250319_JPP_2.3.1_fix0.1]
 
 ### Added
-
 - Changelog.
 
 ### Fixed
-
 - UTF-8 support.
 
 ## [20250319_JPP_2.3.1_0]

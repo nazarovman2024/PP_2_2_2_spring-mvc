@@ -1,5 +1,7 @@
 package web.model;
 
+import javax.validation.constraints.*;
+
 import javax.persistence.*;
 
 @Entity
@@ -11,47 +13,59 @@ public class User {
     private Long id;
 
     @Column(name = "name")
-    private String firstName;
+    @NotNull(message = "Name cannot be empty")
+    @Size(min = 2, max = 20, message = "Name must be between 2 and 50 characters")
+    @Pattern(regexp = "^[a-zA-Zа-яА-Я]+$", message = "Name must contain only letters")
+    private String name;
 
-    @Column(name = "last_name")
-    private String lastName;
+    @Column
+    @NotNull(message = "Age cannot be empty")
+    @Min(value = 0, message = "Age can't be less than 0")
+    @Max(value = 999999999, message = "Is this fun, huh?")
+    private int age;
+
+    @Column
+    @Email(message = "Not valid Email")
+    private String email;
 
     public User() {
     }
 
-    public User(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
-
-    public Long getId() {
-        return id;
+    public User(String name, int age, String email) {
+        this.name = name;
+        this.age = age;
+        this.email = email;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public Long getId() {
+        return id;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getName() {
+        return name;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+    public void setAge(int age) { this.age = age; }
+
+    public int getAge() { return age; }
+
+    public void setEmail(String email) { this.email = email; }
+
+    public String getEmail() { return email; }
 
     @Override
     public String toString() {
         return "Id = " + id + "\n"
-                + "First Name = " + firstName + "\n"
-                + "Last Name = " + lastName + "\n";
+                + "Name = " + name + "\n"
+                + "Age = " + age + "\n"
+                + "Email = " + email + "\n";
     }
 }

@@ -1,5 +1,7 @@
 package web.controller;
 
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import web.model.User;
 import web.service.UserService;
@@ -9,24 +11,31 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.validation.Valid;
+
 @Controller
 public class UserController {
 
     private final UserService userService;
 
-    @PostMapping("/users/add")
+    @PostMapping("/users")
     public String saveUserController(
-            @RequestParam("firstName") String firstName,
-            @RequestParam("lastName") String lastName
+            @ModelAttribute("user") @Valid User user,
+            BindingResult bindingResult,
+            Model model
     ) {
-        User user = new User(firstName, lastName);
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("users", userService.getUsers(10));
+            return "users";
+        }
         userService.add(user);
         return "redirect:/users";
     }
 
     @GetMapping(value = "/users")
     public String getUsersController(
-            @RequestParam(value = "count", defaultValue = "10") int count, Model model
+            @RequestParam(value = "count", defaultValue = "10") int count,
+            Model model
     ) {
         model.addAttribute("user", new User());
         model.addAttribute("users", userService.getUsers(count));
@@ -35,25 +44,24 @@ public class UserController {
 
     @GetMapping(value = "/users/edit")
     public String editUserController(
-            @RequestParam(value = "id", defaultValue = "0") long id, Model model
+            @RequestParam(value = "id", defaultValue = "0") long id,
+            Model model
     ) {
         User user = userService.getUser(id);
         model.addAttribute("user", user);
         return "edit";
     }
 
-    @PostMapping("/users/edit/apply")
+    @PostMapping("/users/edit")
     public String applyEditUserController(
-            @RequestParam("id") long id,
-            @RequestParam("firstName") String firstName,
-            @RequestParam("lastName") String lastName
+            @ModelAttribute("user") @Valid User user,
+            BindingResult bindingResult
     ) {
-        User user = userService.getUser(id);
-        if (user != null) {
-            user.setFirstName(firstName);
-            user.setLastName(lastName);
-            userService.update(user);
+        if (bindingResult.hasErrors()) {
+            return "edit";
         }
+
+        userService.update(user);
 
         return "redirect:/users";
     }

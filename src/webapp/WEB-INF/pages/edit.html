@@ -20,8 +20,8 @@
 
         .btn-users {
             display: inline-block;
-            padding: 10px 20px;
-            font-size: 16px;
+            padding: 8px 15px;
+            font-size: 15px;
             cursor: pointer;
             text-align: center;
             text-decoration: none;
@@ -29,8 +29,8 @@
             color: #fff;
             background-color: #4CAF50;
             border: none;
-            border-radius: 5px;
-            box-shadow: 0 4px #999;
+            border-radius: 4px;
+            box-shadow: 0 3px #999;
         }
 
         .btn-users:hover {background-color: #3e8e41}
@@ -56,29 +56,26 @@
     <thead>
     <tr>
         <th>ID</th>
-        <th>FirstName</th>
-        <th>LastName</th>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Email</th>
     </tr>
     </thead>
     <tbody>
     <tr>
-        <form th:action="@{/users/edit/apply(id=${user.id})}" method="post" th:object="${user}">
+        <form th:action="@{/users/edit(id=${user.id})}" method="post" th:object="${user}">
             <td th:text="${user.id}"></td>
             <td>
-                <input type="text"
-                       id="firstName"
-                       name="firstName"
-                       th:field="*{firstName}"
-                       th:placeholder="${user.firstName}"
-                       required>
+                <input type="text" th:field="*{name}" placeholder="Name" required>
+                <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="error"></div>
             </td>
             <td>
-                <input type="text"
-                       id="lastName"
-                       name="lastName"
-                       th:field="*{lastName}"
-                       th:placeholder="${user.lastName}"
-                       required>
+                <input type="text" th:field="*{age}" placeholder="Age" required>
+                <div th:if="${#fields.hasErrors('age')}" th:errors="*{age}" class="error"></div>
+            </td>
+            <td>
+                <input type="text" th:field="*{email}" placeholder="Email" required>
+                <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error"></div>
             </td>
             <td>
                 <button type="submit" class="btn btn-apply">Apply</button>
